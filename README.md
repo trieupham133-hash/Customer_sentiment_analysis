@@ -252,7 +252,7 @@ Hiểu: Chung là đang làm gì
 ## PHASE 2 — TEXT PREPROCESSING
 #### Mục tiêu:
 Làm sạch và chuẩn hóa toàn bộ dữ liệu văn bản.
-Thành viên phụ trách:
+Thành viên phụ trách: Nhật Tiến
 
 
 #### Làm việc trên:
@@ -308,10 +308,9 @@ Hiểu: Mình đang làm gì
 ---
 
 ## PHASE 3 — FEATURE ENGINEERING
-
 #### Mục tiêu:
 Biến dữ liệu text thành vector số.
-Thành viên phụ trách:
+Thành viên phụ trách: Hưng Trương
 
 #### Làm việc trên:
 notebooks/
@@ -350,7 +349,7 @@ Hiểu: Mình đang làm gì
 ## PHASE 4 — BASELINE MACHINE LEARNING MODELS
 #### Mục tiêu:
 Tạo các mô hình cơ sở để làm chuẩn so sánh.
-Thành viên phụ trách:
+Thành viên phụ trách: Quốc Triều
 
 #### Làm việc trên:
 notebooks/
@@ -386,7 +385,7 @@ Hiểu: Mình đang làm gì
 ## PHASE 5 — DEEP LEARNING MODELS
 #### Mục tiêu:
 Xây dựng các mô hình hiện đại cho NLP.
-Thành viên phụ trách:
+Thành viên phụ trách: Ngọc Tiến, Hoàng Sang
 
 #### Làm việc trên:
 notebooks/
@@ -400,61 +399,36 @@ src/models/
 data/interim/clean_reviews.csv
 
 #### Công việc:
-Có thể dựa trên pipeline trên, không thì tạo mới cũng oke thoi nhưng chung quy là tạo được một mô hình DL tốt 
+Có thể dựa trên các pipeline trên, không thì tạo mới cũng oke thoi nhưng chung quy là tạo được một mô hình DL tốt 
 1. LSTM
-
 Text
-
 ↓
-
 Embedding
-
 ↓
-
 LSTM
-
 ↓
-
 Linear
-
 ↓
-
 Softmax
 
-2. PhoBERT Fine-Tuning
-
+3. PhoBERT Fine-Tuning
 Text
-
 ↓
-
 PhoBERT
-
 ↓
-
 Classification Head
-
 ↓
-
 Softmax
 
-3. PhoBERT + Metadata
-
+4. PhoBERT + Metadata
 PhoBERT Embedding
-
 *
-
 rating_stars
-
 *
-
 has_media
-
 ↓
-
 Dense Layer
-
 ↓
-
 Prediction
 
 #### Thư viện:
@@ -480,7 +454,7 @@ Hiểu:
 ## PHASE 6 — MODEL EVALUATION & ERROR ANALYSIS
 #### Mục tiêu:
 So sánh các mô hình, giải thích các tham số
-Thành viên phụ trách:
+Thành viên phụ trách: Nhật Tiến
 
 #### Làm việc trên:
 notebooks/
