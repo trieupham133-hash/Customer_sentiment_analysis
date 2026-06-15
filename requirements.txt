@@ -4,10 +4,12 @@ emoji
 matplotlib
 seaborn
 scikit-learn
+joblib
 underthesea
 pyvi
 torch
 transformers
 datasets
 evaluate
+gensim
 jupyter
