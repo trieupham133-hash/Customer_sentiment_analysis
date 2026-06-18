@@ -62,7 +62,7 @@ def document_embedding(model: Word2Vec, tokens: list[str]) -> np.ndarray:
 
 def build_document_embeddings(model: Word2Vec, sentences: list[list[str]]) -> np.ndarray:
     return np.vstack([document_embedding(model, tokens) for tokens in sentences])
-
+# Ma trận đặc trưng:(số_văn_bản × vector_size) với Vector_size là kích thước của văn bản
 
 def save_artifact(
     output_path: Path,
