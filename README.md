@@ -4,7 +4,7 @@
 
 Customer reviews contain valuable signals about customer satisfaction, product quality, service issues, and brand perception. However, manually reading and classifying large volumes of reviews is slow, inconsistent, and difficult to scale.
 
-This project builds an end-to-end Natural Language Processing pipeline to classify Vietnamese customer reviews into three sentiment categories: **Positive**, **Neutral**, and **Negative**. The repository is organized for reproducible experimentation, model comparison, evaluation, and final reporting.
+This project builds an end-to-end Natural Language Processing pipeline to classify Vietnamese customer reviews into three sentiment categories: **Positive**, and **Negative**. The repository is organized for reproducible experimentation, model comparison, evaluation, and final reporting.
 
 ## Objectives
 
@@ -232,7 +232,7 @@ data/raw/reviews.csv
 ### 3. Thống kê mô tả
 - Số lượng review
 - Số lượng nhãn
-- Tỷ lệ Positive / Neutral / Negative
+- Tỷ lệ Positive / Negative
 - Phân bố Rating
 
 ### 4. Phân tích văn bản
@@ -244,12 +244,8 @@ data/raw/reviews.csv
 - Vẽ các biểu đồ mô tả dữ liệu
 
 ## 📚 Thư viện
-
-- pandas
-- numpy
-- matplotlib
-- seaborn
-- wordcloud
+ 
+ - Có thể xem thêm trong requirements.txt
 
 ## 📤 Kết quả đầu ra
 
@@ -346,7 +342,7 @@ data/interim/clean_reviews.csv
 
 Biến dữ liệu văn bản thành vector số phục vụ huấn luyện mô hình.
 
-**Thành viên phụ trách:** Hưng Trương, Quang Phong
+**Thành viên phụ trách:** Hưng Trương
 
 ## 📂 Làm việc trên
 
@@ -631,3 +627,5 @@ reports/
 - Confusion Matrix
 - False Positive
 - False Negative
+
+# Bảng tóm tắt việc phân chia công việc:
