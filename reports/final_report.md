@@ -627,6 +627,42 @@ Mô hình có khả năng phát hiện tốt các mẫu dữ liệu thuộc cả
 Nhìn chung, cơ chế **Self-Attention** của PhoBERT kết hợp với các đặc trưng bổ trợ từ metadata đã giúp hệ thống xây dựng được một bộ phân loại cảm xúc có độ ổn định và tính bền vững cao, đạt hiệu suất tiệm cận với khả năng đánh giá của con người.
 
 
+# C. Kết luận 
 
+## Baseline Models
+| Mô hình                 | Class    | Precision | Recall | F1-score | Accuracy (ước tính) |
+| ----------------------- | -------- | --------: | -----: | -------: | ------------------: |
+| **Logistic Regression** | Negative |      0.95 |   0.92 |     0.93 |              ~91.5% |
+|                         | Positive |      0.88 |   0.92 |     0.90 |                     |
+| **Naive Bayes**         | Negative |      0.96 |   0.87 |     0.91 |              ~89.5% |
+|                         | Positive |      0.82 |   0.94 |     0.88 |                     |
+| **SVM**                 | Negative |      0.96 |   0.92 |     0.94 |              ~92.6% |
+|                         | Positive |      0.88 |   0.94 |     0.91 |                     |
+
+## Deep Learning Models
+| Mô hình                | Class    | Precision | Recall | F1-score | Accuracy | Thời gian train |
+| ---------------------- | -------- | --------: | -----: | -------: | -------: | --------------: |
+| **Bidirectional LSTM** | Negative |    0.9362 | 0.9391 |   0.9376 |   92.42% |        ~57 giây |
+|                        | Positive |    0.9055 | 0.9013 |   0.9034 |          |                 |
+| **PhoBERT Hybrid**     | Negative |    0.9715 | 0.9768 |   0.9741 |   96.89% |       ~246 giây |
+|                        | Positive |    0.9650 | 0.9570 |   0.9610 |          |                 |
+
+## Nhận xét tổng quan
+### 1. Về nhóm Baseline (ML)  
+  - **Naive Bayes** là mô hình nhanh nhất do không có tham số học được, nhưng lại yếu nhất về Recall trên class Negative (0.87) do giả định độc lập giữa các từ là không thực tế trong ngôn ngữ tự nhiên.
+  - **Logistic Regression** cân bằng tốt hơn giữa hai class, nhưng bị giới hạn bởi mối quan hệ tuyến tính giữa các đặc trưng.
+  - **SVM** đạt kết quả tốt nhất trong nhóm baseline, đặc biệt F1 Negative đạt 0.94 — điều này phù hợp với bài toán văn bản nhiều chiều, nơi SVM tỏ ra hiệu quả nhờ margin tối đa hóa.
+  -> *Cả 3 baseline đều đạt hiệu suất đáng ngạc nhiên cao dù chỉ dùng TF-IDF, khả năng cao là tập dữ liệu chưa đủ chất lượng.*
+
+### 2. Về nhóm Deep Learning (DL)
+- **Bidirectional LSTM** đạt 92.42% accuracy, ngang với SVM nhưng có khả năng học ngữ cảnh hai chiều — điều mà tất cả baseline đều không làm được. Thời gian huấn luyện chỉ ~57 giây là rất nhanh với một mạng nơ-ron.
+- Mô hình tốt nhất: **PhoBERT + Metadata** với accuracy 96.89%, vượt trội ~4.5% so với LSTM. Tuy nhiên lại có một nhược điểm lớn là thời gian huấn luyện dài hơn nhiều (~246 giây) và yêu cầu tài nguyên tính toán cao hơn hẳn.
+
+### Tổng kết:
+Tuy các mô hình DL đạt hiệu suất khá cao trong việc đánh giá và phân loại các review. Tuy nhiên nếu để nhóm đề xuất thì trong trường hợp cụ thể này, đối với bộ dữ liệu này. Doanh nghiệp nên dùng các mô hình ML là đủ vì chi phí tính toán và vận hành thấp, không quá phức tạp mà lại đạt được hiệu quả tốt. Còn về phần các mô hình DL, nay lại chưa được thể hiện đúng với tài năng của mình khi bộ dữ liệu còn khá đơn giản và dễ đoán, ngoài ra các chi phí vận hành lại khá cao, hiệu suất cũng không chênh lệch nhiều so với tổng thể, không đáng để đánh đổi.   
+Đó là phần tổng quan về vấn đề và cách nhóm em hiểu và giải quyết, nhóm dành nhiều tình cảm để viết ra những điều này và bọn em cũng đã học được nhiều điều thông qua dự án nhỏ này. Cảm ơn cô, tạm biệt và hẹn gặp lại cô!
+
+Chân thành,  
+Nhóm 1
 
 
