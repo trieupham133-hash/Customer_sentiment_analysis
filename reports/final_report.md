@@ -88,7 +88,7 @@ Theo các phân tích, bộ dữ liệu khá sạch khi về căn bản không c
 
 ![alt text](figures/label_by_rating_distribution.png)
 
-**Nhận xét:** Biểu đồ này thể hiện một sự thật quan trọng: **Tập dữ liệu gốc (Shopee) bị nhiễu nhãn (Label Noise) rất nặng**, đặc biệt ở các dải điểm trung gian như `3 sao` và `4 sao` ***(Cần thêm lý do vào đây)***. Khi sang tập **Augmented Dataset**, mặc dù cấu trúc phân phối rating được giữ nguyên, nhưng mối quan hệ gán nhãn đã được phân định rạch ròi và "sạch" hơn đáng kể.
+**Nhận xét:** Biểu đồ này thể hiện một sự thật quan trọng: **Tập dữ liệu gốc (Shopee) bị nhiễu nhãn (Label Noise) rất nặng**, đặc biệt ở các dải điểm trung gian như `3 sao` và `4 sao`. Khi sang tập **Augmented Dataset**, mặc dù cấu trúc phân phối rating được giữ nguyên, nhưng mối quan hệ gán nhãn đã được phân định rạch ròi và "sạch" hơn đáng kể.
 
 Do đồ thị dùng trục tung dạng **Log Scale**, các thanh bar thấp nhìn có vẻ không chênh lệch nhiều, nhưng thực tế số lượng chênh lệch tuyến tính là cực kỳ lớn.
 
