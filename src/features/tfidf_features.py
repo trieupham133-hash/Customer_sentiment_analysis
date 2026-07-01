@@ -10,7 +10,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 try:
     from src.utils.config import DEFAULT_PREPROCESSED_TFIDF_CSV, DEFAULT_TFIDF_FEATURE_PATH
-except ImportError:  # pragma: no cover
+except ImportError: 
     PROJECT_ROOT = Path(__file__).resolve().parents[2]
     DEFAULT_PREPROCESSED_TFIDF_CSV = PROJECT_ROOT / "data" / "processed" / "reviews_baseline_tfidf.csv"
     DEFAULT_TFIDF_FEATURE_PATH = PROJECT_ROOT / "data" / "processed" / "tfidf_features.pkl"
@@ -37,13 +37,17 @@ def build_tfidf_features(
         max_features=max_features,
         ngram_range=ngram_range,
         min_df=min_df,
-        max_df=max_df,
-        norm="l2",
-        smooth_idf=True,
+        max_df=max_df, #
+        norm="l2", # Chuẩn hóa vector TF-IDF theo chuẩn Euclidean.
+        smooth_idf=True, # Làm mượt IDF để tránh chia cho 0.
         sublinear_tf=True,
+        #Áp dụng log(TF) thay vì TF gốc nhằm giảm ảnh hưởng của các từ xuất hiện quá nhiều.
     )
     matrix = vectorizer.fit_transform(texts)
     return vectorizer, matrix
+#chuyển đổi văn bản thành vector TF-IDF.
+#Xây dựng từ điển TF-IDF -> Tính trọng số TF-IDF cho từng từ/ngram -> Chuyển văn bản thành ma trận đặc trưng.
+#output: vectorizer: Đối tượng TF-IDF đã huấn luyện và ma trận TF-IDF có kích thước (số_văn_bản × số_đặc_trưng).
 
 
 def save_feature_artifacts(
@@ -67,10 +71,10 @@ def save_feature_artifacts(
 def run_tfidf_pipeline(
     input_path: Path = DEFAULT_PREPROCESSED_TFIDF_CSV,
     output_path: Path = DEFAULT_TFIDF_FEATURE_PATH,
-    max_features: int = 30_000,
-    ngram_range: tuple[int, int] = (1, 2),
-    min_df: int = 5,
-    max_df: float = 0.95,
+    max_features: int = 30_000, # Giữ lại tối đa 30.000 đặc trưng có giá trị nhất.
+    ngram_range: tuple[int, int] = (1, 2), # ngram_range = (1,2), sử dụng unigram và bigram. ví dụ: "sản phẩm tốt" -> "sản_phẩm", "tốt", "sản_phẩm tốt"
+    min_df: int = 5, # Loại bỏ các từ xuất hiện dưới 5 văn bản.
+    max_df: float = 0.95, #Loại bỏ các từ xuất hiện trong hơn 95% văn bản.
 ) -> Path:
     df = load_preprocessed_data(input_path)
     vectorizer, matrix = build_tfidf_features(
@@ -82,7 +86,7 @@ def run_tfidf_pipeline(
     )
     save_feature_artifacts(output_path, vectorizer, matrix, df.get("id", pd.Series(dtype="object")), df.get("label"))
     return output_path
-
+# lưu Vector TF-IDF, Ma trận đặc trưng, ID mẫu dữ liệu, label phân loại.
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Build and save TF-IDF features for Vietnamese sentiment analysis.")

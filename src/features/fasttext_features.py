@@ -27,11 +27,11 @@ def load_sequence_data(path: Path) -> pd.DataFrame:
     if "text" not in df.columns:
         raise ValueError(f"Expected a 'text' column in {path}, found: {list(df.columns)}")
     return df
-
+# output: DataFrame chứa dữ liệu văn bản. (được load từ file csv)
 
 def make_sentences(texts: Iterable[str]) -> list[list[str]]:
     return [str(text).split() for text in texts]
-
+#output: tách thành token
 
 def train_fasttext(
     sentences: list[list[str]],
@@ -55,20 +55,26 @@ def train_fasttext(
     model.build_vocab(sentences)
     model.train(sentences, total_examples=model.corpus_count, epochs=epochs)
     return model
-
+#biểu diễn ngữ nghĩa dưới vector số
+"""sentences: tập câu đã token hóa.
+        vector_size: kích thước vector từ.
+        window: kích thước cửa sổ ngữ cảnh.
+        min_count: số lần xuất hiện tối thiểu của từ.
+        min_n, max_n : độ dài n-gram ký tự."""
 
 def document_embedding(model: FastText, tokens: list[str]) -> np.ndarray:
     vectors = [model.wv[token] for token in tokens if token in model.wv]
     if not vectors:
         return np.zeros(model.vector_size, dtype=float)
     return np.mean(vectors, axis=0)
-
+#sinh vector cho văn bản: lấy model và token sau đó lấy trung bình các vector từ trong văn bản, trả về vector có kích thước (vector_size,)
+#khi văn bản không chứa từ hợp lệ, trả về vector 0.
 
 def build_document_embeddings(model: FastText, sentences: list[list[str]]) -> np.ndarray:
     return np.vstack([document_embedding(model, tokens) for tokens in sentences])
+#adapt cho toàn tập 
 
-
-def save_artifact(
+def save_artifact(     #Lưu model FastText và vector đặc trưng
     output_path: Path,
     model: FastText,
     doc_embeddings: np.ndarray,
@@ -89,7 +95,7 @@ def save_artifact(
     joblib.dump(artifact, output_path)
 
 
-def run_fasttext_pipeline(
+def run_fasttext_pipeline(    #pileline chính
     input_path: Path = DEFAULT_PREPROCESSED_LSTM_CSV,
     output_path: Path = DEFAULT_FASTTEXT_FEATURE_PATH,
     model_path: Path = DEFAULT_FASTTEXT_MODEL_PATH,
@@ -151,6 +157,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help="Number of worker processes for training.",
     )
     return parser.parse_args(argv)
+#Phân tích tham số
 
 
 def main(argv: list[str] | None = None) -> int:
